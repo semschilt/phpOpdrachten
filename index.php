@@ -4,7 +4,7 @@
 		<title>Php opdrachten</title>
 	</head>
 	<body>
-	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
 	<div class"contact_form">	
 	First name:<input type="text" name="first_name"><br>
 	Last name:<input type="text" name="last_name"><br>
@@ -38,7 +38,7 @@
 
 		// define var's and set to empty values
 		$first_name = $last_name = $gender = $news = $email = $messages = "";
-		$sql = $dbh->prepare("INSERT INTO contact_form VALUES (1, :first_name, :last_name, :gender, :news, :email, :messages )");
+		$sql = $dbh->prepare("INSERT INTO contact_form VALUES (0, :first_name, :last_name, :gender, :news, :email, :messages )");
 		$sql->bindparam(':first_name', $first_name);
 		$sql->bindparam(':last_name', $last_name);
 		$sql->bindparam(':gender', $gender);
@@ -55,13 +55,6 @@
 			$email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
 			$messages = filter_input(INPUT_POST, "messages");
 			$sql->execute();
-		}
-
-		function test_input($data) {
-			$data = trim($data);
-			$data = stripcslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
 		}
 ?>
 
